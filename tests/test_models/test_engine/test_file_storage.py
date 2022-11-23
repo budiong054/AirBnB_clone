@@ -7,6 +7,7 @@ import unittest
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
 
+
 class TestFileStorage(unittest.TestCase):
     """This class provide a test suite for the FileStorage class
     """
@@ -45,5 +46,4 @@ class TestFileStorage(unittest.TestCase):
         """This test the reload method
         """
         fs = FileStorage()
-        #print(fs.all())
         fs.reload()
