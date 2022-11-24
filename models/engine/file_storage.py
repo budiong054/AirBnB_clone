@@ -3,6 +3,7 @@
 
 This module contains the ``FileStorage``
 """
+from models.base_model import BaseModel
 import json
 
 
@@ -21,13 +22,17 @@ class FileStorage():
     def new(self, obj):
         """Sets in ``__objects`` the ``obj`` with key ``<obj class name>.id``
         """
-        FileStorage.__objects[f'{obj.__class__.__name__}.{obj.id}'] = str(obj)
+        if obj:
+            FileStorage.__objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
 
     def save(self):
         """Serializes ``__objects to the JSON file
         """
+        dict_obj = {}
+        for key, obj in FileStorage.__objects.items():
+            dict_obj[key] = obj.to_dict()
         with open(self.__file_path, mode='w', encoding='utf-8') as a_file:
-            to_json_string = json.dumps(self.__objects)
+            to_json_string = json.dumps(dict_obj)
             a_file.write(to_json_string)
 
     def reload(self):
@@ -42,4 +47,6 @@ class FileStorage():
         else:
             json_string = a_file.read()
             a_file.close()
-            FileStorage.__objects = json.loads(json_string)
+            for key, obj in json.loads(json_string).items():
+                obj = eval(obj['__class__'])(**obj)
+                FileStorage.__objects[key] = obj

@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """The ``base_model`` modules contains the ``BaseModel class
 """
-from models import storage
+#from models import storage
+import models
 from datetime import datetime
 import uuid
 
@@ -23,7 +24,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         """Return the str representation of the class
@@ -34,7 +35,7 @@ class BaseModel():
         """Updates the public instance attribute `updated_at` with the
             current datetime
         """
-        storage.save()
+        models.storage.save()
         self.updated_at = datetime.now()
 
     def to_dict(self):
