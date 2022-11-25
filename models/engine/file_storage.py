@@ -4,6 +4,7 @@
 This module contains the ``FileStorage``
 """
 from models.base_model import BaseModel
+from models.user import User
 import json
 
 

@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """The ``base_model`` modules contains the ``BaseModel class
 """
-#from models import storage
 import models
 from datetime import datetime
 import uuid

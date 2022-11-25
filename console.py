@@ -4,6 +4,7 @@
 """
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -12,6 +13,7 @@ class HBNBCommand(cmd.Cmd):
         cmd.Cmd
     """
     prompt = '(hbnb) '
+    __cls_names = ('BaseModel', 'User')
 
     def do_quit(self, line):
         """Quit command to exit the program
@@ -28,14 +30,14 @@ class HBNBCommand(cmd.Cmd):
             the `id`
 
         Args:
-            cls(obj:BaseModel): The class name
+            cls(obj): The class name
         """
         if not cls:
             print("** class name missing **")
-        elif cls != 'BaseModel':
+        elif cls not in self.__cls_names:
             print("** class doesn't exist **")
         else:
-            new_model = BaseModel()
+            new_model = eval(f'{cls}')()
             new_model.save()
             print(new_model.id)
 
@@ -59,12 +61,12 @@ class HBNBCommand(cmd.Cmd):
             line = self.parseline(args)
             cls = line[0]
             obj_id = line[1]
-            if cls != 'BaseModel':
+            if cls not in self.__cls_names:
                 print("** class doesn't exit **")
             elif not obj_id:
                 print("** instance id missing **")
             else:
-                key = f'BaseModel.{obj_id}'
+                key = f'{cls}.{obj_id}'
                 all_obj = storage.all()
                 if key in all_obj.keys():
                     print(all_obj[key])
@@ -93,12 +95,12 @@ class HBNBCommand(cmd.Cmd):
             line = self.parseline(args)
             cls = line[0]
             obj_id = line[1]
-            if cls != 'BaseModel':
+            if cls not in self.__cls_names:
                 print("** class doesn't exit **")
             elif not obj_id:
                 print("** instance id missing **")
             else:
-                key = f'BaseModel.{obj_id}'
+                key = f'{cls}.{obj_id}'
                 all_obj = storage.all()
                 if key in all_obj.keys():
                     del all_obj[key]
@@ -116,13 +118,20 @@ class HBNBCommand(cmd.Cmd):
               "name and id (save the change into the JSON file).\n"
               "e.g: (hbnb) destroy BaseModel 1234-1234-1234\n")
 
-    def do_all(self, args):
+    def do_all(self, arg):
         """Prints all string representation of all instances based or not on
             the class name
         """
-        if not args or args == 'BaseModel':
-            for key in storage.all().keys():
-                print(storage.all()[key])
+        all_list = []
+        if not arg:
+            for key, obj in storage.all().items():
+                all_list.append(str(obj))
+            print(all_list)
+        elif arg in self.__cls_names:
+            for key, obj in storage.all().items():
+                if key.split('.')[0] == arg:
+                    all_list.append(str(obj))
+            print(all_list)
         else:
             print("** class doesn't exit **")
 
@@ -133,6 +142,20 @@ class HBNBCommand(cmd.Cmd):
               "Description:\n\tPrints all string representation of all"
               "instances based or not on the class name.\n"
               "e.g: (hbnb) all BaseModel or (hbnb) all\n")
+
+    def do_update(self, args):
+        pass
+
+    def help_update(self):
+        """help text for <update> command
+        """
+        print("Usage:\n\tupdate <class name> <id> <attribute name> \"<attribut"
+              "e value>\"\nDescription:\n\tUpdates an instance based on the"
+              "class name and id by adding or updating attribute (save the"
+              " change into the JSON file).\n\nNote: Only one attribute can be"
+              " updated at the time\n"
+              "e.g: (hbnb) update BaseModel 1234-1234-1234 email "
+              "\"aibnb@mail.com\"\n")
 
     def emptyline(self):
         """Execute nothing
