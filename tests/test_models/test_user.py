@@ -21,14 +21,14 @@ class TestUser(unittest.TestCase):
         """
         user = User()
         self.assertIsInstance(user.password, str)
-    
+
     def test_class_attribute_first_name(self):
         """This test case test the class attribute ``first_name``
             for correct instance
         """
         user = User()
         self.assertIsInstance(user.first_name, str)
-    
+
     def test_class_attribute_last_name(self):
         """This test case test the class attribute ``last_name``
             for correct instance

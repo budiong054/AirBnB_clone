@@ -23,6 +23,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """EOF command to signal end of file
         """
+        print()
         return True
 
     def do_create(self, cls):
@@ -144,7 +145,32 @@ class HBNBCommand(cmd.Cmd):
               "e.g: (hbnb) all BaseModel or (hbnb) all\n")
 
     def do_update(self, args):
-        pass
+        """Updates an instance based on the class name and id by adding
+            or updating attribute (save the change into the JSON file)
+        """
+        arg_list = args.split()
+        if len(arg_list) < 1:
+            print("** class name missing **")
+        elif arg_list[0] not in self.__cls_names:
+            print("** class doesn't exit **")
+        elif len(arg_list) < 2:
+            print("** instance id missing **")
+        elif f'{arg_list[0]}.{arg_list[1]}' not in storage.all().keys():
+            print("** no instance found **")
+        elif len(arg_list) < 3:
+            print("** attribute name missing **")
+        elif len(arg_list) < 4:
+            print("** value missing **")
+        else:
+            cls = arg_list[0]
+            obj_id = arg_list[1]
+            attr_name = arg_list[2]
+            attr_val = arg_list[3].strip('\"')  # Remove the double quote
+            obj = storage.all()[f'{cls}.{obj_id}']
+            my_model = eval(f'{cls}')(**obj.to_dict())  # Creates new instance
+            setattr(my_model, f'{attr_name}', attr_val)
+            storage.new(my_model)
+            my_model.save()
 
     def help_update(self):
         """help text for <update> command

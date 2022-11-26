@@ -30,7 +30,7 @@ The console or command interpreter create the data model and allows create, upda
 
 ## Requeriments 📋
 ---
-Airbnb was built and tested in Ubuntu 14.04 LTS via Vagrant in VirtualBox. Programming languaje python3
+Airbnb was built and tested in Ubuntu 20.04.4 LTS via Vagrant in VirtualBox. Programming language python3
 
 ## Installation and execution 🔧
 ---
@@ -132,9 +132,9 @@ solid@DESKTOP-6PPFSAT:~/H/AirBnB_clone$ echo "show User 55b76419-6009-4b36-b88a-
 ```
 
 ## Development environment 🛠️
-This project has been tested on Ubuntu 14.06.6 LTS
+This project has been tested on Ubuntu 20.04.4 LTS
 
-* Programming languaje Python
+* Programming language Python
 * The tests are carried out in virtualBox
 * Development environment manager vagrant
 * Style guidelines: PEP 8 (version 1.7) || Google Style Python Docstrings
