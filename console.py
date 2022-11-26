@@ -189,10 +189,33 @@ class HBNBCommand(cmd.Cmd):
               "e.g: (hbnb) update BaseModel 1234-1234-1234 email "
               "\"aibnb@mail.com\"\n")
 
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class <class name>.count()
+        """
+        if arg in self.__cls_names:
+            count = 0
+            for key, obj in storage.all().items():
+                if key.split('.')[0] == arg:
+                    count += 1
+            print(count)
+        else:
+            print("** class doesn't exist **")
+
     def emptyline(self):
         """Execute nothing
         """
         pass
+
+    def onecmd(self, args):
+        """Overrides the parent class method
+        """
+        args_list = []
+        if '.' in args.split()[0]:
+            line = args.split()[0].split('.')
+            args_list.append(line[1].strip('()'))
+            args_list.append(line[0])
+            args = ' '.join(args_list)
+        return cmd.Cmd.onecmd(self, args)
 
 
 if __name__ == '__main__':
