@@ -69,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             cls = line[0]
             obj_id = line[1]
             if cls not in self.__cls_names:
-                print("** class doesn't exit **")
+                print("** class doesn't exist **")
             elif not obj_id:
                 print("** instance id missing **")
             else:
@@ -103,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
             cls = line[0]
             obj_id = line[1]
             if cls not in self.__cls_names:
-                print("** class doesn't exit **")
+                print("** class doesn't exist **")
             elif not obj_id:
                 print("** instance id missing **")
             else:
@@ -140,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
                     all_list.append(str(obj))
             print(all_list)
         else:
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
 
     def help_all(self):
         """help text for <all> command
@@ -158,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg_list) < 1:
             print("** class name missing **")
         elif arg_list[0] not in self.__cls_names:
-            print("** class doesn't exit **")
+            print("** class doesn't exist **")
         elif len(arg_list) < 2:
             print("** instance id missing **")
         elif f'{arg_list[0]}.{arg_list[1]}' not in storage.all().keys():
@@ -204,13 +204,13 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """Execute nothing
         """
-        pass
+        print()
 
     def onecmd(self, args):
         """Overrides the parent class method
         """
         args_list = []
-        if '.' in args.split()[0]:
+        if len(args.split()) > 0 and '.' in args.split()[0]:
             line = args.split()[0].split('.')
             args_list.append(line[1].strip('()'))
             args_list.append(line[0])

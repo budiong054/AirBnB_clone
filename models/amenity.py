@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class Amenity(BaseModel):
     """Amenity class inherit from the BaseModel
-    
+
     Args:
         name(str): The name of the amenity
     """
