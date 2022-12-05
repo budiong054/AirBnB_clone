@@ -3,20 +3,19 @@
     margin-bottom: 0;
 }
 
+
+.article-row{
+    display: flex;
+    justify-content: center;
+}
+
 .places article{
     width: 390px;
     padding: 20px;
     margin: 20px;
     border: 1px #FF5A5F solid;
     border-radius: 4px;
-    /* display: inline-block; */
 }
-
-/* .places article:last-child{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
 
 .places article h2{
     margin: 0;

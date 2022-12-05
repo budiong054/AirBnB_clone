@@ -55,6 +55,7 @@
     right: 0px;
     top: 1px;
     padding: 15px 20px;
+    z-index: 2;
     display: none;
 }
 
