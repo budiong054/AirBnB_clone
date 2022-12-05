@@ -1,0 +1,73 @@
+.filters{
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.filters button{
+    font-size: 18px;
+    background-color: #FF5A5F;
+    border: none;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border-radius: 4px;
+    position: absolute;
+    right: 30px;
+}
+
+.filters button:hover{
+    opacity: 90%;
+}
+
+.filters .locations,
+.filters .amenities{
+    height: 100%;
+    width: 25%;
+}
+
+.filters h3{
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-left: 30px;
+}
+
+.filters h4{
+    font-weight: 400;
+    font-size: 14px;
+    margin-top: 0;
+    margin-left: 30px;
+}
+
+.filters div:first-child{
+    border-right: 1px #DDDDDD solid;
+}
+
+.filters .popover{
+    background-color: #FAFAFA;
+    border: 1px #DDDDDD solid;
+    border-radius: 4px;
+    position: relative;
+    right: 0px;
+    top: 1px;
+    padding: 15px 20px;
+    display: none;
+}
+
+.filters .locations:hover .popover,
+.filters .amenities:hover .popover{
+    display: block;
+}
+
+.filters ul{
+    list-style-type: none;
+}
+
+.popover h2{
+    font-size: 16px;
+    margin: 0;
+}

@@ -7,5 +7,5 @@ footer{
     align-items: center;
     position: absolute;
     bottom: 0;
-    border-top: 1px #CCCCCC;
+    border-top: 1px #CCCCCC solid;
 }
