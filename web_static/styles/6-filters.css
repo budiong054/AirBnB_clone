@@ -59,6 +59,10 @@
     display: none;
 }
 
+.amenities .popover li{
+    padding-left: 45px;
+}
+
 .filters .locations:hover .popover,
 .filters .amenities:hover .popover{
     display: block;
